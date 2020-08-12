@@ -5,6 +5,19 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p class="lead mb-0">您的 IP 地址</p>
+    <h2 class="display-4">@Model.DisplayIp</h2>
+</div>
+
+<div class="list-group">
+    @foreach (var h in HttpContext.Request.Headers)
+    {
+        <a href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-2">@h.Key</h5>
+            </div>
+
+            <p class="mb-0 text-break">@h.Value</p>
+        </a>
+    }
 </div>

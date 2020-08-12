@@ -1,9 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <Version>0.0.1.0</Version>
+    <Authors>huhubun</Authors>
+    <Company>huhubun</Company>
+    <Product>Bun IP</Product>
+    <RepositoryUrl>https://github.com/huhubun/BunIp</RepositoryUrl>
+    <PackageProjectUrl>https://ipv6.bun.plus</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
