@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BunIp.Web.Helpers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -20,27 +22,11 @@ namespace BunIp.Web.Pages
         {
         }
 
-        public string HeaderRealIp => HttpContext.Request.Headers["X-Real-IP"];
-
-        public IEnumerable<string> HeaderForwardedFor => HttpContext.Request.Headers["X-Forwarded-For"];
-
-        public IPAddress RemoteIpAddress => HttpContext.Connection.RemoteIpAddress;
-
-        public string DisplayIp
+        public IPAddress DisplayIp
         {
             get
             {
-                if (HeaderRealIp != null)
-                {
-                    return HeaderRealIp;
-                }
-
-                if (HeaderForwardedFor != null && HeaderForwardedFor.Any())
-                {
-                    return HeaderForwardedFor.First();
-                }
-
-                return RemoteIpAddress.ToString();
+                return IpHelper.GetRealIp(HttpContext);
             }
         }
     }
