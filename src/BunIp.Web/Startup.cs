@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -12,6 +13,8 @@ namespace BunIp.Web
 {
     public class Startup
     {
+        private const string CORS_POLICY_NAME = "BUN_IP_CORS";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +36,18 @@ namespace BunIp.Web
                 return Configuration.GetSection("BunIp").Get<BunIpConfig>(); ;
             });
 
+            services.AddCors(options =>
+            {
+                var origins = new string[]
+                {
+                    "https://ip.bun.plus",
+                    "https://ipv4.bun.plus",
+                    "https://ipv6.bun.plus",
+                    "http://localhost:5000"
+                };
+
+                options.AddPolicy(CORS_POLICY_NAME, builder => builder.WithOrigins(origins).AllowAnyMethod().AllowAnyHeader());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +70,8 @@ namespace BunIp.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors(CORS_POLICY_NAME);
 
             app.UseEndpoints(endpoints =>
             {

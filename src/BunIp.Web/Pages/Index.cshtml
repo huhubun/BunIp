@@ -6,7 +6,42 @@
 
 <div class="text-center">
     <p class="lead mb-0">您的 IP 地址</p>
-    <h2 class="display-4">@Model.DisplayIp</h2>
+
+    <vc:ip-tag address-family="@Model.DisplayIp.AddressFamily"></vc:ip-tag>
+
+    <h2 class="display-4">
+        @Model.DisplayIp
+    </h2>
+
+    @if (Model.TryGetIpV4 || Model.TryGetIpV6)
+    {
+        <div id="LoadingGetAnotherIp" class="text-center text-secondary">
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <p class="lead">
+                正在检查其他 IP 地址
+            </p>
+        </div>
+    }
+
+    @if (Model.TryGetIpV4)
+    {
+        <div id="GetIpV4">
+            <p class="lead">
+                您也拥有 <small><vc:ip-tag address-family="InterNetwork"></vc:ip-tag></small> 地址 <span class="ip-address"></span>
+            </p>
+        </div>
+    }
+
+    @if (Model.TryGetIpV6)
+    {
+        <div id="GetIpV6">
+            <p class="lead">
+                您也拥有 <small><vc:ip-tag address-family="InterNetworkV6"></vc:ip-tag></small> 地址 <span class="ip-address"></span>
+            </p>
+        </div>
+    }
 </div>
 
 <div class="list-group">
@@ -21,3 +56,38 @@
         </a>
     }
 </div>
+
+
+@section Scripts
+{
+    <script>
+        function showAnotherIp(container) {
+            return function (data) {
+                container.find('.ip-address').text(data.ip)
+            }
+        }
+
+        function hideLoadingGetAnotherIp() {
+            $("#LoadingGetAnotherIp").hide()
+        }
+
+        $(function () {
+            var getIpV4 = $('#GetIpV4')
+            var getIpV6 = $('#GetIpV6')
+
+            var get;
+
+            if (getIpV4.length > 0) {
+                get = $.get('https://ipv4.bun.plus/ip', showAnotherIp(getIpV4))
+            }
+
+            if (getIpV6.length > 0) {
+                get = $.get('https://ipv6.bun.plus/ip', showAnotherIp(getIpV6))
+            }
+
+            if (get) {
+                get.always(hideLoadingGetAnotherIp)
+            }
+        });
+    </script>
+}
