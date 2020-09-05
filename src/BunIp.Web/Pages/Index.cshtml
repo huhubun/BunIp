@@ -4,12 +4,12 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
+<div class="text-center bg-light">
     <p class="lead mb-0">您的 IP 地址</p>
 
     <vc:ip-tag address-family="@Model.DisplayIp.AddressFamily"></vc:ip-tag>
 
-    <h2 class="display-4">
+    <h2 id="IpDisplay" class="display-4">
         @Model.DisplayIp
     </h2>
 

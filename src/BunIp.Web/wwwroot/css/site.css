@@ -69,3 +69,42 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/* BUN IP CSS
+-------------------------------------------------- */
+
+/*
+    首页 IP 展示部分
+    防止小屏幕的设备 IPv6 地址过长产生横向滚动条
+    如果实在显示不下，允许换行显示
+*/
+#IpDisplay.display-4 {
+    font-size: 1.25rem;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+@media (min-width: 576px) {
+    #IpDisplay.display-4 {
+        font-size: 1.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    #IpDisplay.display-4 {
+        font-size: 2.28rem;
+    }
+}
+
+@media (min-width: 992px) {
+    #IpDisplay.display-4 {
+        font-size: 3.08rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    #IpDisplay.display-4 {
+        font-size: 3.5rem;
+    }
+}
