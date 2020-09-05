@@ -1,0 +1,8 @@
+﻿@model BunIp.Web.Pages.Shared.Components.IpOnlyMessage.ViewModel
+
+@if (Model.DeployMode != Configs.BunIpConfigs.DeployMode.Hybrid)
+{
+    <div class="alert alert-primary" role="alert">
+        当前为 @Model.DeployMode Only 站点，建议访问主站 <a href="https://ip.bun.plus" class="alert-link">https://ip.bun.plus</a> 获取完整 IP 信息。
+    </div>
+}
