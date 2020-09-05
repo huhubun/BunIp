@@ -18,8 +18,9 @@
                     @siteName
                 </a>
 
-                <span class="navbar-text">
-                    v@(System.Reflection.Assembly.GetEntryAssembly().GetName().Version)
+                <span class="form-inline">
+                    <span class="text-muted">v@(System.Reflection.Assembly.GetEntryAssembly().GetName().Version)</span>
+                    <vc:pi-logo />
                 </span>
             </div>
         </nav>
@@ -66,5 +67,11 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        $(function () {
+            $('#PiLogo').tooltip()
+        })
+    </script>
 </body>
 </html>
