@@ -16,7 +16,6 @@
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">
                     @siteName
-                    <vc:ip-v6-tag></vc:ip-v6-tag>
                 </a>
 
                 <span class="navbar-text">
@@ -31,9 +30,32 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; @DateTime.Now.Year <a class="text-reset" href="https://bun.plus">huhubun</a> - <a class="text-reset" href="https://github.com/huhubun/BunIp">GitHub</a> - <a class="text-reset" href="http://www.beian.miit.gov.cn/">辽ICP备19020441号</a> - <a class="text-reset" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=21021102000757">辽公网安备21021102000757号</a>
+    <footer class="border-top footer bg-dark text-white text-center">
+        <div class="container mt-2 mb-2">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="text-reset nav-link disabled" href="#">Bun IP <vc:ip-v6-tag></vc:ip-v6-tag></a>
+                </li>
+                <li class="nav-item">
+                    <a class="text-reset nav-link" href="#">关于本站</a>
+                </li>
+                <li class="nav-item">
+                    <a class="text-reset nav-link" href="https://github.com/huhubun/BunIp">GitHub</a>
+                </li>
+            </ul>
+
+            <div>
+                &copy; @DateTime.Now.Year <a class="text-reset" href="https://bun.plus">huhubun</a>
+            </div>
+
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="text-reset nav-link" href="http://www.beian.miit.gov.cn/">辽ICP备19020441号</a>
+                </li>
+                <li class="nav-item">
+                    <a class="text-reset nav-link" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=21021102000757">辽公网安备21021102000757号</a>
+                </li>
+            </ul>
         </div>
     </footer>
 
