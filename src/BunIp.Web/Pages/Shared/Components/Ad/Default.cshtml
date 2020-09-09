@@ -27,7 +27,7 @@
         var ad = Model.Ad as ImageAd;
 
         <div class="@classNames">
-            <a href="@ad.Url"><img src="@ad.ImageUrl" title="@ad.Description" class="mx-auto d-block img-fluid" /></a>
+            <a href="@ad.Url" target="_blank"><img src="@ad.ImageUrl" title="@ad.Description" class="mx-auto d-block img-fluid" /></a>
         </div>
     }
 
@@ -36,7 +36,7 @@
         var ad = Model.Ad as TextAd;
 
         <div>
-            <a href="@ad.Url" class="btn btn-link btn-sm text-wrap text-reset text-decoration-none">
+            <a href="@ad.Url" target="_blank" class="btn btn-link btn-sm text-wrap text-reset text-decoration-none">
                 <span class="badge badge-light">推广</span>
                 @ad.Text
             </a>
