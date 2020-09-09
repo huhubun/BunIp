@@ -6,6 +6,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@ViewData["MetaDescription"]" />
+    <meta name="keywords" content="@ViewData["MetaKeywords"]" />
     <title>@ViewData["Title"] - @siteName</title>
     <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.bun.plus/ip/wwwroot/icon_512.png">
     <link rel="icon" type="image/png" href="https://cdn.bun.plus/ip/wwwroot/favicon.png">
@@ -51,9 +53,6 @@
                     <a class="text-reset nav-link disabled" href="#">Bun IP <vc:ip-v6-tag></vc:ip-v6-tag></a>
                 </li>
                 <li class="nav-item">
-                    <a class="text-reset nav-link" href="#">关于本站</a>
-                </li>
-                <li class="nav-item">
                     <a class="text-reset nav-link" href="https://github.com/huhubun/BunIp">GitHub</a>
                 </li>
             </ul>
@@ -97,5 +96,11 @@
             $('#PiLogo').tooltip()
         })
     </script>
+
+    @* 站长统计 *@
+    <div class="d-none">
+        <script type="text/javascript" src="https://s4.cnzz.com/z_stat.php?id=1279258597&web_id=1279258597"></script>
+    </div>
+
 </body>
 </html>

@@ -1,7 +1,9 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "本机 IP 地址查询、IPv6 兼容性测试";
+    ViewData["MetaDescription"] = "通过 Bun IP 站点可以测试您的网络是否支持 IPv6，也能查看您的公网 IP 地址。";
+    ViewData["MetaKeywords"] = "IPv6测试,IPv6兼容,IPv6地址,IP地址查询,本机IP,公网IP";
 
     var tryGetIpV4 = Model.TryGetIpV4 && Model.AjaxIpv4Url != null;
     var tryGetIpV6 = Model.TryGetIpV6 && Model.AjaxIpv6Url != null;
