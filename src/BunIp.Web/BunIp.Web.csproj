@@ -4,12 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
-    <Version>0.0.1.0</Version>
+    <Version>0.0.2</Version>
     <Authors>huhubun</Authors>
     <Company>huhubun</Company>
     <Product>Bun IP</Product>
     <RepositoryUrl>https://github.com/huhubun/BunIp</RepositoryUrl>
     <PackageProjectUrl>https://ip.bun.plus</PackageProjectUrl>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
