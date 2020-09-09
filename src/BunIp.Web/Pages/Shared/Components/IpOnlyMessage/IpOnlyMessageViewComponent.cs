@@ -1,4 +1,5 @@
 ﻿using BunIp.Web.Configs;
+using BunIp.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BunIp.Web.Pages.Shared.Components.IpOnlyMessage
@@ -16,7 +17,8 @@ namespace BunIp.Web.Pages.Shared.Components.IpOnlyMessage
         {
             var model = new ViewModel
             {
-                DeployMode = _bunIpConfig.DeployMode
+                DeployMode = _bunIpConfig.DeploySite.GetDeployMode(Request),
+                HybridSiteUrl = _bunIpConfig.DeploySite.Hybrid?.GetUri()?.ToString()
             };
 
             return View(model);

@@ -2,6 +2,9 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+
+    var tryGetIpV4 = Model.TryGetIpV4 && Model.AjaxIpv4Url != null;
+    var tryGetIpV6 = Model.TryGetIpV6 && Model.AjaxIpv6Url != null;
 }
 
 <vc:ip-only-message />
@@ -15,7 +18,7 @@
         @Model.DisplayIp
     </h2>
 
-    @if (Model.TryGetIpV4 || Model.TryGetIpV6)
+    @if (tryGetIpV4 || tryGetIpV6)
     {
         <div id="LoadingGetAnotherIp" class="text-center text-secondary">
             <div class="spinner-border" role="status">
@@ -27,7 +30,7 @@
         </div>
     }
 
-    @if (Model.TryGetIpV4)
+    @if (tryGetIpV4)
     {
         <div id="GetIpV4" class="d-none">
             <p class="lead">
@@ -36,7 +39,7 @@
         </div>
     }
 
-    @if (Model.TryGetIpV6)
+    @if (tryGetIpV6)
     {
         <div id="GetIpV6" class="d-none">
             <p class="lead">
@@ -84,11 +87,11 @@
             var get;
 
             if (getIpV4.length > 0) {
-                get = $.get('https://ipv4.bun.plus/ip', showAnotherIp(getIpV4))
+                get = $.get('@Model.AjaxIpv4Url', showAnotherIp(getIpV4))
             }
 
             if (getIpV6.length > 0) {
-                get = $.get('https://ipv6.bun.plus/ip', showAnotherIp(getIpV6))
+                get = $.get('@Model.AjaxIpv6Url', showAnotherIp(getIpV6))
             }
 
             if (get) {

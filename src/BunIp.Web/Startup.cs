@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -42,8 +41,7 @@ namespace BunIp.Web
                 {
                     "https://ip.bun.plus",
                     "https://ipv4.bun.plus",
-                    "https://ipv6.bun.plus",
-                    "http://localhost:5000"
+                    "https://ipv6.bun.plus"
                 };
 
                 options.AddPolicy(CORS_POLICY_NAME, builder => builder.WithOrigins(origins).AllowAnyMethod().AllowAnyHeader());
