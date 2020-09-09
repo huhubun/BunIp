@@ -6,6 +6,6 @@ namespace BunIp.Web.Pages.Shared.Components.PiLogo
     {
         public string Model { get; set; }
 
-        public DeployMode DeployMode { get; set; }
+        public DeployMode? DeployMode { get; set; }
     }
 }

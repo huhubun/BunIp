@@ -1,10 +1,7 @@
 ﻿using BunIp.Web.Configs;
 using BunIp.Web.Configs.BunIpConfigs;
+using BunIp.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BunIp.Web.Pages.Shared.Components.IpV6Tag
 {
@@ -19,9 +16,11 @@ namespace BunIp.Web.Pages.Shared.Components.IpV6Tag
 
         public IViewComponentResult Invoke()
         {
+            var deployMode = _bunIpConfig.DeploySite.GetDeployMode(Request);
+
             var model = new ViewModel
             {
-                ShowTag = _bunIpConfig.DeployMode != DeployMode.IPv4
+                ShowTag = deployMode.HasValue && deployMode != DeployMode.IPv4
             };
 
             return View(model);
