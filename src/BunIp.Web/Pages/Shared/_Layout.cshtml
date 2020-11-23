@@ -34,7 +34,14 @@
                 </a>
 
                 <span class="form-inline">
-                    <span class="text-muted">v@(System.Reflection.Assembly.GetEntryAssembly().GetName().Version)</span>
+                    <span id="VersionInfo"
+                          class="text-muted"
+                          data-toggle="tooltip"
+                          data-placement="bottom"
+                          title="由 @System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription 驱动">
+                        v@(System.Reflection.Assembly.GetEntryAssembly().GetName().Version)
+                    </span>
+
                     <vc:pi-logo />
                 </span>
             </div>
@@ -93,7 +100,7 @@
 
     <script>
         $(function () {
-            $('#PiLogo').tooltip()
+            $('#VersionInfo, #PiLogo').tooltip()
         })
     </script>
 

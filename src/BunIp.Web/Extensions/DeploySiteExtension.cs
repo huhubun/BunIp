@@ -7,21 +7,6 @@ namespace BunIp.Web.Extensions
 {
     public static class DeploySiteExtension
     {
-        public static bool IsHybridSite(this DeploySite deploySite, HttpRequest request)
-        {
-            return GetDeployMode(deploySite, request) == DeployMode.Hybrid;
-        }
-
-        public static bool IsIpV4OnlySite(this DeploySite deploySite, HttpRequest request)
-        {
-            return GetDeployMode(deploySite, request) == DeployMode.IPv4;
-        }
-
-        public static bool IsIpV6OnlySite(this DeploySite deploySite, HttpRequest request)
-        {
-            return GetDeployMode(deploySite, request) == DeployMode.IPv6;
-        }
-
         public static DeployMode? GetDeployMode(this DeploySite deploySite, HttpRequest request)
         {
             if (deploySite == null)
