@@ -1,0 +1,51 @@
+﻿@page
+@model IndexModel
+
+<div class="text-center">
+    <p class="lead mb-0">当前地址</p>
+    <h1 class="display-4">@Model.DisplayIp</h1>
+
+    @if (Model.ShouldTryIpv4)
+    {
+        <div id="TryIpv4" class="d-none">
+            <p class="lead">
+                您也拥有 IPv4 地址 <span class="ip-address"></span>
+            </p>
+        </div>
+    }
+
+    @if (Model.ShouldTryIpv6)
+    {
+        <div id="TryIpv6" class="d-none">
+            <p class="lead">
+                您也拥有 IPv6 地址 <span class="ip-address"></span>
+            </p>
+        </div>
+    }
+
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            var tryIpV4 = $('#TryIpv4')
+            var tryIpV6 = $('#TryIpv6')
+
+            if (tryIpV4.length > 0) {
+                $.get('@Model.Ipv4Url' + 'ip', showAnotherIp(tryIpV4))
+            }
+
+            if (tryIpV6.length > 0) {
+                $.get('@Model.Ipv6Url' + 'ip', showAnotherIp(tryIpV6))
+            }
+
+            function showAnotherIp(container) {
+                return function (data) {
+                    container.find('.ip-address').text(data.ip)
+                    container.removeClass('d-none')
+                }
+            }
+        });
+    </script>
+}
