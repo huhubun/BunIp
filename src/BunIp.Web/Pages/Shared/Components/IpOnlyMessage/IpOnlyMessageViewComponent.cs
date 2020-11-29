@@ -18,7 +18,7 @@ namespace BunIp.Web.Pages.Shared.Components.IpOnlyMessage
             var model = new ViewModel
             {
                 DeployMode = _bunIpConfig.DeploySite.GetDeployMode(Request),
-                HybridSiteUrl = _bunIpConfig.DeploySite.Hybrid?.GetUri()?.ToString()
+                HybridSiteUrl = _bunIpConfig.DeploySite.Hybrid?.Uri?.ToString()
             };
 
             return View(model);

@@ -19,16 +19,11 @@ namespace BunIp.Web.Helpers
         {
             if (File.Exists(MODEL_PATH))
             {
-                using (var fs = File.Open(MODEL_PATH, FileMode.Open, FileAccess.Read))
-                using (var sr = new StreamReader(fs))
+                var model = File.ReadAllText(MODEL_PATH).TrimEnd((char)0);
+                // 只有真的是树莓派前缀开头的才返回
+                if (model.StartsWith(MODEL_PREFIX, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    var result = sr.ReadToEnd();
-
-                    // 只有真的是树莓派前缀开头的才返回
-                    if (result.StartsWith(MODEL_PREFIX, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        return result;
-                    }
+                    return model;
                 }
             }
 

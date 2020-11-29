@@ -1,4 +1,6 @@
-﻿namespace BunIp.Web.Configs.BunIpConfigs.DeploySites
+﻿using System;
+
+namespace BunIp.Web.Configs.BunIpConfigs.DeploySites
 {
     public class SiteInfo
     {
@@ -16,5 +18,18 @@
         /// 端口号
         /// </summary>
         public int? Port { get; set; }
+
+        public Uri Uri
+        {
+            get
+            {
+                if (Port.HasValue)
+                {
+                    return (new UriBuilder(Scheme, Domain, Port.Value)).Uri;
+                }
+
+                return (new UriBuilder(Scheme, Domain)).Uri;
+            }
+        }
     }
 }

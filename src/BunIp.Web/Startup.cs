@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -32,19 +34,26 @@ namespace BunIp.Web
 
             services.AddSingleton<BunIpConfig>(service =>
             {
-                return Configuration.GetSection("BunIp").Get<BunIpConfig>(); ;
+                return Configuration.GetSection("BunIp").Get<BunIpConfig>();
             });
 
             services.AddCors(options =>
             {
-                var origins = new string[]
+                var bunIpConfig = Configuration.GetSection("BunIp").Get<BunIpConfig>();
+                var DeploySites = bunIpConfig.DeploySite;
+
+                var originUris = new Uri[]
                 {
-                    "https://ip.bun.plus",
-                    "https://ipv4.bun.plus",
-                    "https://ipv6.bun.plus"
+                    DeploySites.Hybrid.Uri,
+                    DeploySites.IPv4.Uri,
+                    DeploySites.IPv6.Uri
                 };
 
-                options.AddPolicy(CORS_POLICY_NAME, builder => builder.WithOrigins(origins).AllowAnyMethod().AllowAnyHeader());
+                options.AddPolicy(CORS_POLICY_NAME, builder =>
+                    builder
+                        .WithOrigins(originUris.Select(u => u.ToString().TrimEnd('/')).ToArray())
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
             });
         }
 

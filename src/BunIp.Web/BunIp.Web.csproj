@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
-    <Version>0.0.3</Version>
+    <Version>0.0.5</Version>
     <Authors>huhubun</Authors>
     <Company>huhubun</Company>
     <Product>Bun IP</Product>

@@ -71,17 +71,6 @@
 @section Scripts
 {
     <script>
-        function showAnotherIp(container) {
-            return function (data) {
-                container.find('.ip-address').text(data.ip)
-                container.removeClass('d-none')
-            }
-        }
-
-        function hideLoadingGetAnotherIp() {
-            $("#LoadingGetAnotherIp").hide()
-        }
-
         $(function () {
             var getIpV4 = $('#GetIpV4')
             var getIpV6 = $('#GetIpV6')
@@ -98,6 +87,17 @@
 
             if (get) {
                 get.always(hideLoadingGetAnotherIp)
+            }
+
+            function showAnotherIp(container) {
+                return function (data) {
+                    container.find('.ip-address').text(data.ip)
+                    container.removeClass('d-none')
+                }
+            }
+
+            function hideLoadingGetAnotherIp() {
+                $("#LoadingGetAnotherIp").hide()
             }
         });
     </script>
