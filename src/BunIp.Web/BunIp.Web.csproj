@@ -1,10 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
-    <Version>0.0.5</Version>
+    <Version>0.0.6</Version>
     <Authors>huhubun</Authors>
     <Company>huhubun</Company>
     <Product>Bun IP</Product>
@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://ip.bun.plus</PackageProjectUrl>
     <OutputType>Exe</OutputType>
     <UserSecretsId>41c79ff7-e3af-4a67-bde4-f01b60711a31</UserSecretsId>
+	<ImplicitUsings>true</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
