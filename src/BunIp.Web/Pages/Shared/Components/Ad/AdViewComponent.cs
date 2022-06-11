@@ -1,5 +1,4 @@
 ﻿using BunIp.Web.Configs;
-using BunIp.Web.Configs.BunIpConfigs;
 using BunIp.Web.Configs.BunIpConfigs.Ads;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +20,7 @@ namespace BunIp.Web.Pages.Shared.Components.AdTag
 
             if (_bunIpConfig.Ad != null)
             {
-                ad = typeof(Ad).GetProperty(positionString).GetValue(_bunIpConfig.Ad) as IAdType;
+                ad = typeof(Configs.BunIpConfigs.Ad).GetProperty(positionString).GetValue(_bunIpConfig.Ad) as IAdType;
             }
 
             var model = new ViewModel

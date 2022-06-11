@@ -1,26 +1,59 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using BunIp.Web.Configs;
+using Microsoft.AspNetCore.HttpOverrides;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
-namespace BunIp.Web
+const string CORS_POLICY_NAME = "BUN_IP_CORS";
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorPages().AddJsonOptions(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+builder.Services.AddSingleton<BunIpConfig>(service =>
+{
+    return builder.Configuration.GetSection("BunIp").Get<BunIpConfig>();
+});
+
+builder.Services.AddCors(options =>
+{
+    var bunIpConfig = builder.Configuration.GetSection("BunIp").Get<BunIpConfig>();
+    var deploySites = bunIpConfig.DeploySite;
+
+    var originUris = new Uri[]
+    {
+        deploySites.Hybrid.Uri,
+        deploySites.IPv4.Uri,
+        deploySites.IPv6.Uri
+    };
+
+    options.AddPolicy(CORS_POLICY_NAME, builder =>
+        builder
+            .WithOrigins(originUris.Select(u => u.ToString().TrimEnd('/')).ToArray())
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
+var app = builder.Build();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Error");
 }
+
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseCors(CORS_POLICY_NAME);
+
+app.MapRazorPages();
+
+app.Run();
